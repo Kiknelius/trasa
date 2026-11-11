@@ -154,11 +154,17 @@
   </div>
 </div>
 
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
 <script type="module">
 const $ = id => document.getElementById(id);
 let THREE;
 try {
-  THREE = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js');
+  THREE = await import('three');
 } catch (e) {
   $('loadErr').classList.remove('hidden');
   $('startBtn').classList.add('hidden');
@@ -321,7 +327,42 @@ const MODELS = {
       box(2.24, .2, .14, DARK, 0, .55, 3.28)); } },
 };
 
+/* Blender-ში აგებული მოდელები (models/cars.js ← blender/build_cars.py).
+   თუ ვერ ჩაიტვირთა, თამაში ზემოთ აღწერილ კოდით აგებულ მოდელებს იყენებს. */
+let GLB = null;
+try {
+  const [{ GLTFLoader }, mod] = await Promise.all([import('three/addons/loaders/GLTFLoader.js'), import('./models/cars.js')]);
+  const bin = Uint8Array.from(atob(mod.default), c => c.charCodeAt(0));
+  const gltf = await new GLTFLoader().parseAsync(bin.buffer, '');
+  GLB = {};
+  for (const k in MODELS) GLB[k] = gltf.scene.getObjectByName('car_' + k) || null;
+} catch (e) { console.warn('Blender-ის მოდელები ვერ ჩაიტვირთა, გამოიყენება მარტივი მოდელები', e); GLB = null; }
+
+const PART_COLORS = { glass: GLASS, trim: DARK, tyre: TYRE, rim: 0xc9ccd1, white: 0xf4f4f6, cargo: 0xe9e9ee };
+const flatCache = new Map();
+const flatMat = c => { if (!flatCache.has(c)) flatCache.set(c, new THREE.MeshLambertMaterial({ color: c, flatShading: true })); return flatCache.get(c); };
+function partMat(name, color) {
+  if (name.startsWith('head')) return headMat;
+  if (name.startsWith('tail')) return tailMat;
+  for (const k in PART_COLORS) if (name.startsWith(k)) return flatMat(PART_COLORS[k]);
+  return flatMat(color);                                   // ძარა — მანქანის ფერი
+}
+function makeGlbVehicle(kind, color) {
+  const m = MODELS[kind], g = new THREE.Group(), wheels = [];
+  const src = GLB[kind].clone(true);
+  src.position.set(0, 0, 0);
+  src.traverse(o => {
+    if (o.isMesh) o.material = partMat(o.material.name || '', color);
+    if (o.name.startsWith('wheel')) wheels.push(o);
+  });
+  g.add(src);
+  const sh = new THREE.Mesh(flat(m.hw * 2 + 0.5, m.hl * 2 + 0.6), shadowMat); sh.position.y = 0.05; g.add(sh);
+  g.userData = { kind, hw: m.hw, hl: m.hl, r: m.r, wheels };
+  return g;
+}
+
 function makeVehicle(kind, color) {
+  if (GLB && GLB[kind]) return makeGlbVehicle(kind, color);
   const m = MODELS[kind], g = new THREE.Group(), wheels = [];
   m.build(g, color);
   const k = m.r / 0.37;
@@ -602,7 +643,7 @@ function frame(now) {
 }
 requestAnimationFrame(frame);
 
-window.__game = { S, traffic, coins, start, crash, toMenu, setPlayer, makeVehicle, MODELS, scene,
+window.__game = { S, traffic, coins, start, crash, toMenu, setPlayer, makeVehicle, MODELS, scene, glb: !!GLB,
   tick(dt) { update(dt); renderer.render(scene, camera); } };
 </script>
 </body>
