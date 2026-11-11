@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#9fd4f2">
+<title>ტრასა — რბოლა</title>
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    margin: 0; height: 100%; overflow: hidden; background: #9fd4f2;
+    font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans Georgian", sans-serif;
+    color: #fff; touch-action: none; user-select: none; -webkit-user-select: none;
+    overscroll-behavior: none;
+  }
+  canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+  button { font: inherit; color: inherit; }
+
+  #touch { position: fixed; inset: 0; }
+
+  #hud {
+    position: fixed; left: 0; right: 0; top: 0;
+    padding: calc(env(safe-area-inset-top, 0px) + 12px) 14px 0;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,.45);
+  }
+  #hud .big { font-size: 34px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+  #hud .lbl { font-size: 11px; letter-spacing: .08em; opacity: .85; margin-top: 4px; }
+  #hud .right { text-align: right; }
+  #hud .row { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  #hud .coin { color: #ffd24a; }
+  #mute {
+    pointer-events: auto; margin-top: 8px; width: 40px; height: 40px; border-radius: 50%;
+    border: 0; background: rgba(0,0,0,.28); font-size: 18px;
+  }
+
+  .ctl {
+    position: fixed; bottom: calc(env(safe-area-inset-bottom, 0px) + 22px);
+    width: 76px; height: 76px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,.55); background: rgba(0,0,0,.18);
+    display: grid; place-items: center; font-size: 30px; pointer-events: none;
+    transition: transform .08s, background .08s;
+  }
+  #ctlL { left: 18px; } #ctlR { right: 18px; }
+  .ctl.on { background: rgba(255,255,255,.4); transform: scale(.92); }
+  #brakeTip {
+    position: fixed; left: 50%; transform: translateX(-50%);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 46px);
+    font-size: 12px; opacity: .8; pointer-events: none; text-shadow: 0 1px 4px rgba(0,0,0,.5);
+    white-space: nowrap;
+  }
+
+  .panel {
+    position: fixed; inset: 0; display: grid; place-items: center; padding: 24px;
+    background: rgba(12,22,34,.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+  }
+  .card { width: min(360px, 100%); text-align: center; }
+
+  /* მენიუ: შუაში მანქანა ჩანს */
+  #menu {
+    display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+    padding: calc(env(safe-area-inset-top, 0px) + 28px) 22px calc(env(safe-area-inset-bottom, 0px) + 22px);
+    background: linear-gradient(to bottom, rgba(12,22,34,.7), rgba(12,22,34,0) 30%, rgba(12,22,34,0) 50%, rgba(12,22,34,.85) 76%);
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+  }
+  h1 { margin: 0; font-size: 58px; font-weight: 900; letter-spacing: .02em; font-style: italic; line-height: 1.05;
+       text-shadow: 0 4px 0 #c1272d, 0 8px 22px rgba(0,0,0,.4); }
+  h2 { margin: 0 0 6px; font-size: 40px; font-weight: 900; font-style: italic; }
+  p { margin: 8px 0 0; font-size: 15px; line-height: 1.5; opacity: .92; }
+  .picker { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .picker button {
+    width: 54px; height: 54px; border-radius: 50%; border: 2px solid rgba(255,255,255,.6);
+    background: rgba(0,0,0,.25); font-size: 20px;
+  }
+  .picker button:active { background: rgba(255,255,255,.35); }
+  #carName { font-size: 24px; font-weight: 800; }
+  .sub { font-size: 12px; opacity: .75; margin-top: 2px; }
+  .how { margin-top: 14px; font-size: 12.5px; line-height: 1.6; opacity: .9; }
+  .how b { color: #ffd24a; font-weight: 700; }
+  button.go {
+    margin-top: 16px; width: 100%; padding: 17px; border: 0; border-radius: 16px;
+    background: #e63946; font-size: 21px; font-weight: 800;
+    box-shadow: 0 6px 0 #9d1f29, 0 12px 24px rgba(0,0,0,.3);
+  }
+  button.go:active { transform: translateY(4px); box-shadow: 0 2px 0 #9d1f29; }
+  button.ghost {
+    margin-top: 18px; width: 100%; padding: 13px; border-radius: 14px; font-size: 16px; font-weight: 700;
+    background: rgba(255,255,255,.12); border: 1.5px solid rgba(255,255,255,.45);
+  }
+  .stats { display: flex; gap: 10px; margin-top: 18px; }
+  .stat { flex: 1; padding: 12px 6px; border-radius: 14px; background: rgba(255,255,255,.12); }
+  .stat .v { font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .stat .k { font-size: 11px; opacity: .8; margin-top: 2px; }
+  #newBest { color: #ffd24a; font-weight: 800; margin-top: 12px; font-size: 17px; }
+  #bestMenu { margin-top: 12px; font-size: 14px; opacity: .85; min-height: 20px; }
+  #flash { position: fixed; inset: 0; background: #fff; opacity: 0; pointer-events: none; transition: opacity .5s; }
+  .hidden { display: none !important; }
+  @media (max-height: 560px) { .how { display: none; } h1 { font-size: 40px; } }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="touch"></div>
+
+<div id="hud" class="hidden">
+  <div>
+    <div class="big" id="score">0</div>
+    <div class="lbl">ქულა</div>
+    <button id="mute" aria-label="ხმა">🔊</button>
+  </div>
+  <div class="right">
+    <div class="row"><span id="kmh">0</span> კმ/სთ</div>
+    <div class="row coin">● <span id="coins">0</span></div>
+  </div>
+</div>
+
+<div id="ctlL" class="ctl hidden">◀</div>
+<div id="ctlR" class="ctl hidden">▶</div>
+<div id="brakeTip" class="hidden">ორივე ერთად — მუხრუჭი</div>
+<div id="flash"></div>
+
+<div id="menu" class="panel">
+  <div class="card">
+    <h1>ტრასა</h1>
+    <p>გაუსწარი მანქანებს და შეაგროვე მონეტები</p>
+  </div>
+  <div class="card">
+    <div class="picker">
+      <button id="prevCar" aria-label="წინა მანქანა">◀</button>
+      <div><div id="carName"></div><div class="sub">აირჩიე მანქანა</div></div>
+      <button id="nextCar" aria-label="შემდეგი მანქანა">▶</button>
+    </div>
+    <div class="how">
+      ეკრანის <b>მარცხენა</b> ან <b>მარჯვენა</b> მხარეს დაჭერა — მოხვევა<br>
+      <b>ორივე ერთად</b> — მუხრუჭი
+    </div>
+    <button class="go" id="startBtn">დაწყება</button>
+    <div id="bestMenu"></div>
+    <p id="loadErr" class="hidden">თამაშის ჩასატვირთად ინტერნეტია საჭირო. შეამოწმე კავშირი და გვერდი თავიდან გახსენი.</p>
+  </div>
+</div>
+
+<div id="over" class="panel hidden">
+  <div class="card">
+    <h2>ავარია!</h2>
+    <div id="newBest" class="hidden">ახალი რეკორდი!</div>
+    <div class="stats">
+      <div class="stat"><div class="v" id="oScore">0</div><div class="k">ქულა</div></div>
+      <div class="stat"><div class="v" id="oDist">0</div><div class="k">მეტრი</div></div>
+      <div class="stat"><div class="v" id="oBest">0</div><div class="k">რეკორდი</div></div>
+    </div>
+    <button class="go" id="againBtn">თავიდან</button>
+    <button class="ghost" id="garageBtn">მანქანის შეცვლა</button>
+  </div>
+</div>
+
+<script type="module">
+const $ = id => document.getElementById(id);
+let THREE;
+try {
+  THREE = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js');
+} catch (e) {
+  $('loadErr').classList.remove('hidden');
+  $('startBtn').classList.add('hidden');
+  throw e;
+}
+
+/* ---------- სცენა ---------- */
+const SKY = 0x9fd4f2;
+const LANES = [-4.8, -1.6, 1.6, 4.8];
+const LANE_SPEED = [13, 11, 12, 14];      // სხვა მანქანების სიჩქარე ზოლების მიხედვით (მ/წმ)
+const FAR = -230, NEAR = 18, SPAN = 264;
+
+const renderer = new THREE.WebGLRenderer({ canvas: $('c'), antialias: true, powerPreference: 'high-performance' });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(SKY);
+scene.fog = new THREE.Fog(SKY, 70, 225);
+const camera = new THREE.PerspectiveCamera(65, 1, 0.5, 420);
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0x7a9a5a, 2.0));
+const sun = new THREE.DirectionalLight(0xfff0d0, 2.2);
+sun.position.set(-6, 12, 5);
+scene.add(sun);
+
+const matCache = new Map();
+const mat = c => { if (!matCache.has(c)) matCache.set(c, new THREE.MeshLambertMaterial({ color: c })); return matCache.get(c); };
+const flat = (w, l) => { const g = new THREE.PlaneGeometry(w, l); g.rotateX(-Math.PI / 2); return g; };
+
+// მიწა და გზა
+const ground = new THREE.Mesh(flat(700, 440), mat(0x86b86b)); ground.position.set(0, -0.05, -150); scene.add(ground);
+const shoulder = new THREE.Mesh(flat(16.4, 440), mat(0xb9ad94)); shoulder.position.set(0, -0.02, -150); scene.add(shoulder);
+const road = new THREE.Mesh(flat(13.2, 440), mat(0x3b3f48)); road.position.set(0, 0, -150); scene.add(road);
+const lineMat = new THREE.MeshBasicMaterial({ color: 0xf2f2f2 });
+for (const x of [-6.4, 6.4]) { const e = new THREE.Mesh(flat(0.2, 440), lineMat); e.position.set(x, 0.03, -150); scene.add(e); }
+
+// წყვეტილი ხაზები
+const dummy = new THREE.Object3D();
+const dashes = new THREE.InstancedMesh(flat(0.17, 3.2), lineMat, 3 * 36);
+{ let i = 0; for (const x of [-3.2, 0, 3.2]) for (let k = 0; k < 36; k++) { dummy.position.set(x, 0.03, -272 + k * 8); dummy.updateMatrix(); dashes.setMatrixAt(i++, dummy.matrix); } }
+dashes.frustumCulled = false; scene.add(dashes);
+
+// გზისპირა ბოძები
+const postGeo = new THREE.BoxGeometry(0.16, 1, 0.16); postGeo.translate(0, 0.5, 0);
+const posts = new THREE.InstancedMesh(postGeo, mat(0xf5f5f5), 2 * 15);
+{ let i = 0; for (const x of [-7.6, 7.6]) for (let k = 0; k < 15; k++) { dummy.position.set(x, 0, -270 + k * 20); dummy.updateMatrix(); posts.setMatrixAt(i++, dummy.matrix); } }
+posts.frustumCulled = false; scene.add(posts);
+
+// ხეები და ქვები
+const trunkGeo = new THREE.CylinderGeometry(0.22, 0.32, 1.6, 6); trunkGeo.translate(0, 0.8, 0);
+const leafGeo = new THREE.ConeGeometry(1.7, 3.4, 7); leafGeo.translate(0, 3.1, 0);
+const leafGeo2 = new THREE.ConeGeometry(1.2, 2.6, 7); leafGeo2.translate(0, 4.9, 0);
+const rockGeo = new THREE.DodecahedronGeometry(1, 0);
+const LEAF = [0x2f7d4f, 0x3f9b5b, 0x256b45, 0x5aa24a];
+const scenery = [];
+const rnd = (a, b) => a + Math.random() * (b - a);
+function placeSide(o, z) {
+  const side = Math.random() < 0.5 ? -1 : 1;
+  o.position.set(side * rnd(10, 42), 0, z);
+}
+for (let i = 0; i < 52; i++) {
+  const g = new THREE.Group();
+  if (i % 6 === 5) {
+    const r = new THREE.Mesh(rockGeo, mat(0x8d8f93)); r.scale.set(rnd(.6, 1.5), rnd(.4, .9), rnd(.6, 1.4)); r.position.y = .3; g.add(r);
+  } else {
+    const c = LEAF[i % LEAF.length];
+    g.add(new THREE.Mesh(trunkGeo, mat(0x7a5236)), new THREE.Mesh(leafGeo, mat(c)), new THREE.Mesh(leafGeo2, mat(c)));
+    g.scale.setScalar(rnd(.8, 1.5));
+  }
+  placeSide(g, FAR - 30 + (i / 52) * SPAN);
+  scene.add(g); scenery.push(g);
+}
+
+/* ---------- მანქანების მოდელები ----------
+   ძარა აგებულია გვერდითი პროფილიდან: წერტილები [f, y], სადაც f — მანძილი წინ (+) / უკან (−),
+   y — სიმაღლე. პროფილი „იჭიმება" მანქანის სიგანეზე. */
+const GLASS = 0x1b2836, TYRE = 0x15171a, DARK = 0x23262c;
+const wheelGeo = new THREE.CylinderGeometry(0.37, 0.37, 0.3, 14); wheelGeo.rotateZ(Math.PI / 2);
+const hubGeo = new THREE.CylinderGeometry(0.2, 0.2, 0.33, 8); hubGeo.rotateZ(Math.PI / 2);
+const shadowMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.24, depthWrite: false });
+const tailMat = new THREE.MeshBasicMaterial({ color: 0xff2b2b });
+const headMat = new THREE.MeshBasicMaterial({ color: 0xfff6c8 });
+const asMat = c => typeof c === 'number' ? mat(c) : c;
+// ყუთი: w — სიგანე, h — სიმაღლე, l — სიგრძე; f — პოზიცია წინ/უკან
+const box = (w, h, l, c, x, y, f) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, l), asMat(c)); m.position.set(x, y, -f); return m; };
+const geoCache = new Map();
+function extr(pts, width, c) {
+  const key = width + '|' + pts.join(';');
+  let g = geoCache.get(key);
+  if (!g) {
+    const s = new THREE.Shape();
+    pts.forEach(([f, y], i) => i ? s.lineTo(f, y) : s.moveTo(f, y));
+    g = new THREE.ExtrudeGeometry(s, { depth: width, bevelEnabled: false });
+    g.translate(0, 0, -width / 2); g.rotateY(Math.PI / 2);   // წინა მხარე −Z-ისკენ
+    geoCache.set(key, g);
+  }
+  return new THREE.Mesh(g, asMat(c));
+}
+
+const MODELS = {
+  sedan: { hw: .93, hl: 2.1, r: .36, track: .8, wheels: [1.3, -1.3], headY: .6, tailY: .62,
+    build(g, c) { g.add(
+      extr([[-2.1,.32],[2.1,.32],[2.1,.72],[1.95,.86],[.95,.96],[-1.35,.98],[-2,.94],[-2.1,.74]], 1.86, c),
+      extr([[1,.94],[.4,1.44],[-.85,1.44],[-1.5,.96]], 1.58, GLASS),
+      extr([[.46,1.42],[.38,1.5],[-.83,1.5],[-.93,1.42]], 1.62, c),
+      box(1.6, .5, .1, c, 0, 1.2, -.2),
+      box(1.9, .12, .12, DARK, 0, .4, 2.08), box(1.9, .12, .12, DARK, 0, .4, -2.08)); } },
+
+  sport: { hw: .95, hl: 2.15, r: .36, track: .82, wheels: [1.35, -1.35], headY: .39, tailY: .68,
+    build(g, c) { g.add(
+      extr([[-2.15,.26],[2.15,.26],[2.15,.5],[1.3,.7],[-1.4,.8],[-2.15,.84],[-2.15,.5]], 1.9, c),
+      extr([[.75,.7],[.05,1.14],[-.8,1.14],[-1.55,.8]], 1.5, GLASS),
+      extr([[.1,1.12],[.03,1.19],[-.78,1.19],[-.86,1.12]], 1.54, c),
+      box(.5, .02, 3.2, 0xffffff, 0, .78, -.5).rotateX(-0.037),          // ზოლი
+      box(1.8, .06, .36, DARK, 0, 1.12, -1.95), box(.08, .26, .12, DARK, -.6, .96, -1.95), box(.08, .26, .12, DARK, .6, .96, -1.95),
+      box(1.94, .1, .2, DARK, 0, .3, 2.1)); } },
+
+  suv: { hw: .98, hl: 2.15, r: .44, track: .84, wheels: [1.35, -1.35], headY: .8, tailY: .85,
+    build(g, c) { g.add(
+      extr([[-2.15,.42],[2.15,.42],[2.15,.95],[2,1.08],[1,1.14],[-2.15,1.14]], 1.96, c),
+      extr([[1.05,1.12],[.65,1.72],[-2,1.72],[-2.12,1.12]], 1.7, GLASS),
+      extr([[.7,1.7],[.62,1.78],[-2.02,1.78],[-2.05,1.7]], 1.76, c),
+      box(1.74, .6, .1, c, 0, 1.42, -.3), box(1.74, .6, .1, c, 0, 1.42, -1.25),
+      box(.06, .06, 2.2, DARK, -.7, 1.83, -.7), box(.06, .06, 2.2, DARK, .7, 1.83, -.7),
+      box(2, .16, .14, DARK, 0, .5, 2.13), box(2, .16, .14, DARK, 0, .5, -2.13),
+      box(.5, .5, .16, DARK, 0, 1.0, -2.2)); } },                        // სათადარიგო ბორბალი
+
+  pickup: { hw: .98, hl: 2.4, r: .44, track: .84, wheels: [1.5, -1.5], headY: .8, tailY: .62,
+    build(g, c) { g.add(
+      extr([[-2.4,.44],[2.4,.44],[2.4,.95],[2.25,1.08],[1.3,1.12],[-.45,1.12],[-.45,.8],[-2.4,.8]], 1.96, c),
+      extr([[1.3,1.1],[.9,1.68],[-.3,1.68],[-.45,1.1]], 1.7, GLASS),
+      extr([[.95,1.66],[.88,1.74],[-.3,1.74],[-.36,1.66]], 1.76, c),
+      box(.1, .36, 1.95, c, -.93, .98, -1.42), box(.1, .36, 1.95, c, .93, .98, -1.42), box(1.96, .36, .1, c, 0, .98, -2.35),
+      box(1.7, .02, 1.85, DARK, 0, .815, -1.4),
+      box(2, .16, .14, DARK, 0, .52, 2.38), box(2, .16, .14, DARK, 0, .52, -2.38)); } },
+
+  van: { hw: 1.0, hl: 2.35, r: .4, track: .86, wheels: [1.45, -1.5], headY: .72, tailY: .8,
+    build(g, c) { g.add(
+      extr([[-2.35,.4],[2.3,.4],[2.35,.95],[2.05,1.2],[1.65,1.95],[-2.35,1.95]], 2.0, c),
+      extr([[2.07,1.24],[1.71,1.9],[1.6,1.9],[1.96,1.24]], 1.76, GLASS),
+      box(2.04, .5, 1.0, GLASS, 0, 1.55, .95),
+      box(2.04, .1, 4.5, 0xffffff, 0, 1.05, -.05),
+      box(2.04, .16, .14, DARK, 0, .46, 2.3), box(2.04, .16, .14, DARK, 0, .46, -2.32)); } },
+
+  bus: { hw: 1.2, hl: 4.8, r: .48, track: 1.1, wheels: [3.2, -3.0], headY: .75, tailY: .8,
+    build(g, c) { g.add(
+      box(2.4, 2.5, 9.6, c, 0, 1.65, 0),
+      box(2.44, .8, 8.6, GLASS, 0, 2.15, -.1),
+      box(2.2, 1.15, .08, GLASS, 0, 2.0, 4.78), box(2.0, .7, .08, GLASS, 0, 2.2, -4.78),
+      box(2.44, .14, 9.6, 0xffffff, 0, 1.15, 0),
+      box(2.3, .1, 9.4, 0xf1f1f1, 0, 2.93, 0),
+      box(2.44, .2, .14, DARK, 0, .5, 4.78), box(2.44, .2, .14, DARK, 0, .5, -4.78)); } },
+
+  truck: { hw: 1.15, hl: 3.3, r: .46, track: .98, wheels: [2.4, -1.2, -2.5], headY: .8, tailY: .9,
+    build(g, c) { g.add(
+      extr([[1.5,.5],[3.3,.5],[3.3,1.5],[3.1,2.3],[1.5,2.3]], 2.2, c),
+      extr([[3.32,1.55],[3.14,2.25],[3.05,2.25],[3.23,1.55]], 1.9, GLASS),
+      box(2.24, .45, .7, GLASS, 0, 1.85, 2.45),
+      box(2.3, 2.5, 4.6, 0xe9e9ee, 0, 1.85, -.95),
+      box(2.0, .25, 6.4, DARK, 0, .55, 0),
+      box(2.24, .2, .14, DARK, 0, .55, 3.28)); } },
+};
+
+function makeVehicle(kind, color) {
+  const m = MODELS[kind], g = new THREE.Group(), wheels = [];
+  m.build(g, color);
+  const k = m.r / 0.37;
+  for (const f of m.wheels) for (const s of [-1, 1]) {
+    const w = new THREE.Mesh(wheelGeo, mat(TYRE)); w.add(new THREE.Mesh(hubGeo, mat(0xc9ccd1)));
+    w.scale.set(1, k, k); w.position.set(s * m.track, m.r, -f); g.add(w); wheels.push(w);
+  }
+  const lx = m.hw - 0.34;
+  for (const s of [-1, 1]) g.add(box(.42, .15, .06, headMat, s * lx, m.headY, m.hl + .01), box(.42, .15, .06, tailMat, s * lx, m.tailY, -m.hl - .01));
+  const sh = new THREE.Mesh(flat(m.hw * 2 + 0.5, m.hl * 2 + 0.6), shadowMat); sh.position.y = 0.05; g.add(sh);
+  g.userData = { kind, hw: m.hw, hl: m.hl, r: m.r, wheels };
+  return g;
+}
+
+// მოთამაშის მანქანები
+const PLAYER_CARS = [
+  { kind: 'sport', color: 0xe63946, name: 'სპორტული' },
+  { kind: 'sedan', color: 0x2f6fde, name: 'სედანი' },
+  { kind: 'suv', color: 0x2d8a5f, name: 'ჯიპი' },
+  { kind: 'pickup', color: 0xf08a24, name: 'პიკაპი' },
+];
+let carIdx = 0, player = null;
+try { carIdx = Math.min(PLAYER_CARS.length - 1, Math.max(0, +localStorage.getItem('trasa_car') || 0)); } catch (e) {}
+function setPlayer(i) {
+  carIdx = (i + PLAYER_CARS.length) % PLAYER_CARS.length;
+  const c = PLAYER_CARS[carIdx];
+  if (player) scene.remove(player);
+  player = makeVehicle(c.kind, c.color);
+  scene.add(player);
+  $('carName').textContent = c.name;
+  try { localStorage.setItem('trasa_car', carIdx); } catch (e) {}
+}
+setPlayer(carIdx);
+
+// სხვა მანქანები გზაზე
+const COLORS = [0x2a9d8f, 0xf4a261, 0x457b9d, 0xe9c46a, 0xfafafa, 0x6d597a, 0x264653, 0x8ecae6, 0x52b788, 0xb5651d, 0x9aa0a6];
+const BUS_COLORS = [0xf2b632, 0x3a86c8, 0xd9534f];
+const TRAFFIC = ['sedan', 'sedan', 'sedan', 'sedan', 'suv', 'suv', 'suv', 'pickup', 'pickup', 'van', 'van', 'sport', 'truck', 'truck', 'bus'];
+const pick = a => a[(Math.random() * a.length) | 0];
+const traffic = [], vehPool = {};
+for (const k in MODELS) vehPool[k] = [];
+function spawnVehicle(lane, z) {
+  for (const t of traffic) if (t.userData.lane === lane && Math.abs(t.position.z - z) < 22) return;
+  const kind = pick(TRAFFIC);
+  const v = vehPool[kind].pop() || makeVehicle(kind, pick(kind === 'bus' ? BUS_COLORS : COLORS));
+  v.userData.lane = lane; v.position.set(LANES[lane], 0, z); v.visible = true;
+  if (!v.parent) scene.add(v);
+  traffic.push(v);
+}
+function spawnRow(z) {
+  const order = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
+  const n = Math.random() < 0.35 ? 2 : 1;
+  for (let i = 0; i < n; i++) spawnVehicle(order[i], z + rnd(-3, 3));
+}
+function retire(list, i, pool) { const o = list[i]; o.visible = false; pool.push(o); list[i] = list[list.length - 1]; list.pop(); }
+function clearRoad() {
+  while (traffic.length) retire(traffic, 0, vehPool[traffic[0].userData.kind]);
+  while (coins.length) retire(coins, 0, coinPool);
+}
+
+// მონეტები
+const coinGeo = new THREE.CylinderGeometry(0.55, 0.55, 0.14, 16); coinGeo.rotateX(Math.PI / 2);
+const coinMat = new THREE.MeshLambertMaterial({ color: 0xffc93c, emissive: 0x8a5a00 });
+const coins = [], coinPool = [];
+function spawnCoins(z) {
+  const lane = (Math.random() * 4) | 0;
+  for (let k = 0; k < 6; k++) {
+    const c = coinPool.pop() || new THREE.Mesh(coinGeo, coinMat);
+    c.position.set(LANES[lane], 0.95, z - k * 5); c.visible = true;
+    if (!c.parent) scene.add(c);
+    coins.push(c);
+  }
+}
+
+/* ---------- მდგომარეობა ---------- */
+const S = { mode: 'menu', speed: 0, dist: 0, scroll: 0, coins: 0, x: 0, vx: 0, spawnAcc: 0, coinAcc: 0, shake: 0, t: 0 };
+let best = 0;
+try { best = +localStorage.getItem('trasa_best') || 0; } catch (e) {}
+const showBest = () => { $('bestMenu').textContent = best ? 'რეკორდი: ' + best : ''; };
+showBest();
+const score = () => Math.floor(S.dist) + S.coins * 50;
+const show = (ids, on) => { for (const id of ids) $(id).classList.toggle('hidden', !on); };
+
+function reset() {
+  clearRoad();
+  Object.assign(S, { speed: 20, dist: 0, coins: 0, x: 0, vx: 0, spawnAcc: 0, coinAcc: 0, shake: 0 });
+  player.rotation.set(0, 0, 0);
+  for (let z = -70; z > FAR; z -= 44) spawnRow(z);
+  spawnCoins(-95);
+}
+
+function start() {
+  initAudio(); reset(); S.mode = 'play';
+  show(['menu', 'over'], false); show(['hud', 'ctlL', 'ctlR', 'brakeTip'], true);
+  setTimeout(() => $('brakeTip').classList.add('hidden'), 6000);
+}
+
+function toMenu() {
+  clearRoad();
+  Object.assign(S, { mode: 'menu', speed: 0, x: 0, vx: 0, shake: 0 });
+  player.rotation.set(0, 0, 0);
+  show(['over', 'hud', 'ctlL', 'ctlR', 'brakeTip'], false); show(['menu'], true);
+  showBest();
+}
+
+function crash() {
+  S.mode = 'over'; S.speed = 0; S.shake = 0.6;
+  const sc = score(); const isBest = sc > best;
+  if (isBest) { best = sc; try { localStorage.setItem('trasa_best', best); } catch (e) {} }
+  $('oScore').textContent = sc; $('oDist').textContent = Math.floor(S.dist); $('oBest').textContent = best;
+  $('newBest').classList.toggle('hidden', !isBest);
+  show(['ctlL', 'ctlR', 'brakeTip'], false);
+  const f = $('flash'); f.style.transition = 'none'; f.style.opacity = .8;
+  requestAnimationFrame(() => { f.style.transition = 'opacity .6s'; f.style.opacity = 0; });
+  crashSound(); if (navigator.vibrate) navigator.vibrate(180);
+  setTimeout(() => { if (S.mode === 'over') $('over').classList.remove('hidden'); }, 650);
+}
+
+/* ---------- მართვა ---------- */
+const input = { left: false, right: false };
+const ptrs = new Map(), keys = {};
+function recompute() {
+  let l = keys.ArrowLeft || keys.KeyA, r = keys.ArrowRight || keys.KeyD;
+  for (const x of ptrs.values()) { if (x < innerWidth / 2) l = true; else r = true; }
+  if (keys.ArrowDown || keys.KeyS || keys.Space) l = r = true;
+  input.left = !!l; input.right = !!r;
+  $('ctlL').classList.toggle('on', input.left); $('ctlR').classList.toggle('on', input.right);
+}
+const touch = $('touch');
+touch.addEventListener('pointerdown', e => { e.preventDefault(); ptrs.set(e.pointerId, e.clientX); recompute(); });
+touch.addEventListener('pointermove', e => { if (ptrs.has(e.pointerId)) { ptrs.set(e.pointerId, e.clientX); recompute(); } });
+for (const ev of ['pointerup', 'pointercancel']) addEventListener(ev, e => { ptrs.delete(e.pointerId); recompute(); });
+addEventListener('blur', () => { ptrs.clear(); for (const k in keys) keys[k] = false; recompute(); });
+addEventListener('keydown', e => {
+  if (e.repeat) return;
+  keys[e.code] = true; recompute();
+  if (S.mode === 'menu') {
+    if (e.code === 'ArrowLeft') setPlayer(carIdx - 1);
+    if (e.code === 'ArrowRight') setPlayer(carIdx + 1);
+    if (e.code === 'Enter' || e.code === 'Space') start();
+  } else if (S.mode === 'over' && (e.code === 'Enter' || e.code === 'Space') && !$('over').classList.contains('hidden')) start();
+});
+addEventListener('keyup', e => { keys[e.code] = false; recompute(); });
+addEventListener('contextmenu', e => e.preventDefault());
+$('startBtn').addEventListener('click', start);
+$('againBtn').addEventListener('click', start);
+$('garageBtn').addEventListener('click', toMenu);
+$('prevCar').addEventListener('click', () => setPlayer(carIdx - 1));
+$('nextCar').addEventListener('click', () => setPlayer(carIdx + 1));
+
+/* ---------- ხმა ---------- */
+let ac, master, engOsc, engGain, muted = false;
+function initAudio() {
+  try {
+    if (ac) { ac.resume(); return; }
+    ac = new (window.AudioContext || window.webkitAudioContext)();
+    master = ac.createGain(); master.gain.value = muted ? 0 : 1; master.connect(ac.destination);
+    engOsc = ac.createOscillator(); engOsc.type = 'sawtooth'; engOsc.frequency.value = 60;
+    const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 380;
+    engGain = ac.createGain(); engGain.gain.value = 0;
+    engOsc.connect(lp); lp.connect(engGain); engGain.connect(master); engOsc.start();
+  } catch (e) { ac = null; }
+}
+function beep(freq, dur, vol) {
+  if (!ac) return;
+  const o = ac.createOscillator(), g = ac.createGain();
+  o.type = 'triangle'; o.frequency.setValueAtTime(freq, ac.currentTime); o.frequency.exponentialRampToValueAtTime(freq * 1.5, ac.currentTime + dur);
+  g.gain.setValueAtTime(vol, ac.currentTime); g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + dur);
+  o.connect(g); g.connect(master); o.start(); o.stop(ac.currentTime + dur);
+}
+function crashSound() {
+  if (!ac) return;
+  const n = ac.sampleRate * 0.6 | 0, buf = ac.createBuffer(1, n, ac.sampleRate), d = buf.getChannelData(0);
+  for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 2.2);
+  const s = ac.createBufferSource(), g = ac.createGain(); s.buffer = buf; g.gain.value = 0.5;
+  s.connect(g); g.connect(master); s.start();
+}
+$('mute').addEventListener('click', () => {
+  muted = !muted; $('mute').textContent = muted ? '🔇' : '🔊';
+  if (master) master.gain.value = muted ? 0 : 1;
+});
+document.addEventListener('visibilitychange', () => { if (ac) document.hidden ? ac.suspend() : ac.resume(); last = performance.now(); });
+
+/* ---------- ციკლი ---------- */
+function resize() {
+  const w = innerWidth, h = innerHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize); resize();
+
+const camPos = new THREE.Vector3(), camLook = new THREE.Vector3(), tp = new THREE.Vector3(), tl = new THREE.Vector3();
+let camReady = false;
+
+function update(dt) {
+  const playing = S.mode === 'play', pu = player.userData;
+  S.t += dt;
+  let v = 0;
+  if (playing) {
+    const maxV = 30 + Math.min(S.dist / 140, 34);
+    const brake = input.left && input.right;
+    S.speed = brake ? Math.max(16, S.speed - 28 * dt) : Math.min(maxV, S.speed + 7 * dt);
+    const dir = brake ? 0 : (input.right ? 1 : 0) - (input.left ? 1 : 0);
+    S.vx += (dir * (6.5 + S.speed * 0.06) - S.vx) * Math.min(1, dt * 9);
+    S.x += S.vx * dt;
+    const lim = 6.3 - pu.hw;
+    if (S.x > lim) { S.x = lim; S.vx = Math.min(0, S.vx); }
+    if (S.x < -lim) { S.x = -lim; S.vx = Math.max(0, S.vx); }
+    S.dist += S.speed * dt;
+    v = S.speed;
+  } else if (S.mode === 'menu') { v = 18; S.vx = 0; }
+
+  S.scroll += v * dt;
+  dashes.position.z = S.scroll % 8;
+  posts.position.z = S.scroll % 20;
+  for (const o of scenery) { o.position.z += v * dt; if (o.position.z > NEAR + 10) placeSide(o, o.position.z - SPAN); }
+
+  player.position.x = S.x;
+  if (S.mode !== 'over') { player.rotation.y = -S.vx * 0.03; player.rotation.z = -S.vx * 0.01; }
+  for (const w of pu.wheels) w.rotation.x -= v * dt / pu.r;
+
+  if (playing) {
+    // მოძრაობის სიმჭიდროვე დროთა განმავლობაში იზრდება
+    S.spawnAcc += (S.speed - 12) * dt;
+    const gap = Math.max(26, 46 - S.dist / 350);
+    if (S.spawnAcc > gap) { S.spawnAcc = 0; spawnRow(FAR); }
+    S.coinAcc += S.speed * dt;
+    if (S.coinAcc > 150) { S.coinAcc = 0; spawnCoins(FAR); }
+
+    for (let i = traffic.length - 1; i >= 0; i--) {
+      const t = traffic[i], u = t.userData;
+      t.position.z += (S.speed - LANE_SPEED[u.lane]) * dt;
+      if (t.position.z > NEAR || t.position.z < FAR - 40) { retire(traffic, i, vehPool[u.kind]); continue; }
+      if (Math.abs(t.position.x - S.x) < pu.hw + u.hw - 0.2 && Math.abs(t.position.z) < pu.hl + u.hl - 0.25) { crash(); break; }
+    }
+    for (let i = coins.length - 1; i >= 0; i--) {
+      const c = coins[i];
+      c.position.z += S.speed * dt; c.rotation.y += dt * 4;
+      if (c.position.z > NEAR) { retire(coins, i, coinPool); continue; }
+      if (Math.abs(c.position.x - S.x) < pu.hw + 0.55 && Math.abs(c.position.z) < pu.hl + 0.2) { S.coins++; beep(880, 0.12, 0.12); retire(coins, i, coinPool); }
+    }
+    $('score').textContent = score();
+    $('kmh').textContent = Math.round(S.speed * 3.6);
+    $('coins').textContent = S.coins;
+  }
+
+  if (engGain) {
+    engGain.gain.value += ((playing ? 0.05 : 0) - engGain.gain.value) * Math.min(1, dt * 8);
+    engOsc.frequency.value = 45 + S.speed * 1.7;
+  }
+
+  // კამერა: მენიუში მანქანის გარშემო ბრუნავს, თამაშში უკნიდან მიჰყვება
+  const portrait = camera.aspect < 0.85;
+  let fov;
+  if (S.mode === 'menu') {
+    const a = S.t * 0.35 + 0.7, R = portrait ? 11.5 : 7.5;
+    tp.set(Math.sin(a) * R, 2.7, Math.cos(a) * R); tl.set(0, 0.3, 0); fov = portrait ? 60 : 42;
+  } else {
+    tp.set(S.x * 0.75, portrait ? 5.2 : 4.4, portrait ? 9.5 : 8.5); tl.set(S.x * 0.9, 1.0, -10);
+    fov = (portrait ? 74 : 60) + Math.max(0, S.speed - 20) * 0.13;
+  }
+  const kk = camReady ? Math.min(1, dt * 7) : 1; camReady = true;
+  camPos.lerp(tp, kk); camLook.lerp(tl, kk);
+  const nf = camera.fov + (fov - camera.fov) * kk;
+  if (Math.abs(nf - camera.fov) > 0.02) { camera.fov = nf; camera.updateProjectionMatrix(); }
+  S.shake = Math.max(0, S.shake - dt);
+  const k = S.shake * 0.8;
+  camera.position.set(camPos.x + rnd(-k, k), camPos.y + rnd(-k, k), camPos.z);
+  camera.lookAt(camLook);
+}
+
+let last = performance.now();
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  update(dt);
+  renderer.render(scene, camera);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+window.__game = { S, traffic, coins, start, crash, toMenu, setPlayer, makeVehicle, MODELS, scene,
+  tick(dt) { update(dt); renderer.render(scene, camera); } };
+</script>
+</body>
+</html>
