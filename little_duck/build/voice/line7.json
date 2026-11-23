@@ -1,0 +1,48 @@
+{
+ "text": "Sleepy little feathers on your sleepy little head.",
+ "voice": "en-US-AnaNeural",
+ "rate": "+15%",
+ "pitch": "+4Hz",
+ "words": [
+  {
+   "word": "Sleepy",
+   "start": 0.093458,
+   "dur": 0.467375
+  },
+  {
+   "word": "little",
+   "start": 0.57175,
+   "dur": 0.27175
+  },
+  {
+   "word": "feathers",
+   "start": 0.854333,
+   "dur": 0.423916
+  },
+  {
+   "word": "on",
+   "start": 1.289125,
+   "dur": 0.152166
+  },
+  {
+   "word": "your",
+   "start": 1.452166,
+   "dur": 0.141291
+  },
+  {
+   "word": "sleepy",
+   "start": 1.604333,
+   "dur": 0.402166
+  },
+  {
+   "word": "little",
+   "start": 2.017375,
+   "dur": 0.27175
+  },
+  {
+   "word": "head",
+   "start": 2.3,
+   "dur": 0.315208
+  }
+ ]
+}

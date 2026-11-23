@@ -1,0 +1,33 @@
+{
+ "text": "Hop, hop, hop, hop, hop!",
+ "voice": "en-US-AnaNeural",
+ "rate": "+20%",
+ "pitch": "+10Hz",
+ "words": [
+  {
+   "word": "Hop",
+   "start": 0.091666,
+   "dur": 0.3125
+  },
+  {
+   "word": "hop",
+   "start": 0.622916,
+   "dur": 0.28125
+  },
+  {
+   "word": "hop",
+   "start": 1.122916,
+   "dur": 0.291666
+  },
+  {
+   "word": "hop",
+   "start": 1.633333,
+   "dur": 0.28125
+  },
+  {
+   "word": "hop",
+   "start": 2.14375,
+   "dur": 0.28125
+  }
+ ]
+}

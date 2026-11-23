@@ -1,0 +1,48 @@
+{
+ "text": "Waddle to the pond and then waddle back!",
+ "voice": "en-US-AnaNeural",
+ "rate": "+20%",
+ "pitch": "+10Hz",
+ "words": [
+  {
+   "word": "Waddle",
+   "start": 0.091666,
+   "dur": 0.40625
+  },
+  {
+   "word": "to",
+   "start": 0.508333,
+   "dur": 0.104166
+  },
+  {
+   "word": "the",
+   "start": 0.622916,
+   "dur": 0.114583
+  },
+  {
+   "word": "pond",
+   "start": 0.747916,
+   "dur": 0.395833
+  },
+  {
+   "word": "and",
+   "start": 1.154166,
+   "dur": 0.166666
+  },
+  {
+   "word": "then",
+   "start": 1.33125,
+   "dur": 0.208333
+  },
+  {
+   "word": "waddle",
+   "start": 1.55,
+   "dur": 0.354166
+  },
+  {
+   "word": "back",
+   "start": 1.914583,
+   "dur": 0.354166
+  }
+ ]
+}

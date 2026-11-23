@@ -1,0 +1,49 @@
+LITTLE DUCK - asset credits & licenses
+=====================================
+
+3D MODEL (CC BY 4.0 - attribution required)
+  Title   : Baby duck
+  Author  : patspet
+  URL     : https://sketchfab.com/3d-models/baby-duck-a33f6e51b82f48c6b5e318d48ad1e2c7
+  License : Creative Commons Attribution 4.0 (CC BY 4.0) - http://creativecommons.org/licenses/by/4.0/
+  Changes : recolored (body #FFD63A, beak/feet #FF8C1E), painted eyes replaced by 3D eyes with eyelids,
+            blue rain hood (#3470DE) added, re-posed and animated by code (three.js).
+  File    : assets/baby_duck.glb (downloaded through the Sketchfab Download API)
+
+MUSIC (CC BY 4.0 - attribution required)
+  Title   : Funkorama
+  Author  : Kevin MacLeod (incompetech.com)
+  URL     : https://incompetech.com/music/royalty-free/mp3-royaltyfree/Funkorama.mp3  (ISRC USUAN1100474)
+  License : Creative Commons Attribution 4.0 (CC BY 4.0) - http://creativecommons.org/licenses/by/4.0/
+  Changes : excerpt 27.4 s - 50 s, tempo-matched 101 -> 100 BPM, low-passed at night, fade-out.
+  Note    : used instead of the requested Pixabay track - pixabay.com blocks automated
+            downloads with a Cloudflare bot check, so no Pixabay file could be fetched.
+
+SOUND EFFECTS
+  Duck quack  : "Mallard Duck Quacking" by Mike Koenig - https://soundbible.com/1862-Mallard-Duck-Quacking.html
+                License: Creative Commons Attribution 3.0 (CC BY 3.0) - attribution required
+                (trimmed, high-passed, pitched up 3 semitones)
+  Splashes, bubbles ("plop"), rain loop :
+                "40 CC0 water / splash / slime SFX" by rubberduck -
+                https://opengameart.org/content/40-cc0-water-splash-slime-sfx  - License: CC0 (public domain)
+  Water drop  : "Water Drops" by ceoxblackj - https://opengameart.org/content/water-drops - License: CC0
+  Whoosh, star twinkles : synthesized in code (mix_audio.py) - no license needed
+
+VOICE
+  Text-to-speech with the free Microsoft Edge "Read Aloud" neural voice en-US-AnaNeural via the
+  open-source edge-tts tool (https://github.com/rany2/edge-tts). No paid API was used.
+  The lyrics are original (supplied by the channel owner).
+
+FONT
+  Poppins Bold / ExtraBold - Indian Type Foundry - SIL Open Font License 1.1 (Google Fonts)
+
+SOFTWARE
+  three.js r170 (MIT), Playwright + Chromium (Apache-2.0 / BSD), ffmpeg, numpy, scipy, librosa.
+
+----------------------------------------------------------------
+Text to paste into the YouTube description (required for the CC BY items):
+
+  3D duck: "Baby duck" by patspet (https://sketchfab.com/3d-models/baby-duck-a33f6e51b82f48c6b5e318d48ad1e2c7), licensed under CC BY 4.0, modified.
+  Music: "Funkorama" by Kevin MacLeod (incompetech.com), licensed under CC BY 4.0 (http://creativecommons.org/licenses/by/4.0/).
+  Duck quack: "Mallard Duck Quacking" by Mike Koenig (soundbible.com), licensed under CC BY 3.0.
+  Water sound effects: rubberduck & ceoxblackj on OpenGameArt (CC0).

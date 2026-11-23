@@ -1,0 +1,43 @@
+{
+ "text": "Little Duck, Little Duck, time for bed,",
+ "voice": "en-US-AnaNeural",
+ "rate": "+10%",
+ "pitch": "+6Hz",
+ "words": [
+  {
+   "word": "Little",
+   "start": 0.095458,
+   "dur": 0.363625
+  },
+  {
+   "word": "Duck",
+   "start": 0.470458,
+   "dur": 0.329541
+  },
+  {
+   "word": "Little",
+   "start": 1.061375,
+   "dur": 0.306833
+  },
+  {
+   "word": "Duck",
+   "start": 1.379541,
+   "dur": 0.352291
+  },
+  {
+   "word": "time",
+   "start": 1.970458,
+   "dur": 0.318166
+  },
+  {
+   "word": "for",
+   "start": 2.3,
+   "dur": 0.193166
+  },
+  {
+   "word": "bed",
+   "start": 2.504541,
+   "dur": 0.329541
+  }
+ ]
+}

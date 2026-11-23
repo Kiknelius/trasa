@@ -1,0 +1,98 @@
+{
+ "music": {
+  "source_beat_period": 0.5940655293316949,
+  "bpm_src": 100.99895893218736,
+  "atempo": 0.9901092155528248,
+  "source_start": 27.385019139870284,
+  "downbeat_src": 28.573150198533675
+ },
+ "loudnorm_in": {
+  "input_i": "-21.62",
+  "input_tp": "-6.35",
+  "input_lra": "3.00",
+  "input_thresh": "-31.83",
+  "output_i": "-14.18",
+  "output_tp": "-1.50",
+  "output_lra": "1.50",
+  "output_thresh": "-24.31",
+  "normalization_type": "dynamic",
+  "target_offset": "0.18"
+ },
+ "final_peak_dbfs": -1.5127253465626982,
+ "final_len_s": 22.8,
+ "clipped_samples": 0,
+ "lines": [
+  {
+   "line": 0,
+   "t": [
+    1.2,
+    3.568
+   ],
+   "voice_over_bg_db": 10.3
+  },
+  {
+   "line": 1,
+   "t": [
+    3.6,
+    5.853
+   ],
+   "voice_over_bg_db": 8.1
+  },
+  {
+   "line": 2,
+   "t": [
+    6.0,
+    8.368
+   ],
+   "voice_over_bg_db": 10.1
+  },
+  {
+   "line": 3,
+   "t": [
+    8.4,
+    10.697
+   ],
+   "voice_over_bg_db": 9.1
+  },
+  {
+   "line": 4,
+   "t": [
+    10.8,
+    13.116
+   ],
+   "voice_over_bg_db": 9.6
+  },
+  {
+   "line": 5,
+   "t": [
+    13.2,
+    15.401
+   ],
+   "voice_over_bg_db": 8.7
+  },
+  {
+   "line": 6,
+   "t": [
+    15.6,
+    17.85
+   ],
+   "voice_over_bg_db": 10.4
+  },
+  {
+   "line": 7,
+   "t": [
+    18.0,
+    20.368
+   ],
+   "voice_over_bg_db": 11.2
+  },
+  {
+   "line": 8,
+   "t": [
+    20.55,
+    22.138
+   ],
+   "voice_over_bg_db": 14.1
+  }
+ ]
+}

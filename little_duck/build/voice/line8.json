@@ -1,0 +1,23 @@
+{
+ "text": "Goodnight, Little Duck!",
+ "voice": "en-US-AnaNeural",
+ "rate": "-8%",
+ "pitch": "+0Hz",
+ "words": [
+  {
+   "word": "Goodnight",
+   "start": 0.104333,
+   "dur": 0.611416
+  },
+  {
+   "word": "Little",
+   "start": 1.001083,
+   "dur": 0.394041
+  },
+  {
+   "word": "Duck",
+   "start": 1.408708,
+   "dur": 0.448375
+  }
+ ]
+}

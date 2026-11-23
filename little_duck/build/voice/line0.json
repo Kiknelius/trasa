@@ -1,0 +1,43 @@
+{
+ "text": "Little Duck, Little Duck, splash, splash, splash!",
+ "voice": "en-US-AnaNeural",
+ "rate": "+20%",
+ "pitch": "+10Hz",
+ "words": [
+  {
+   "word": "Little",
+   "start": 0.091666,
+   "dur": 0.333333
+  },
+  {
+   "word": "Duck",
+   "start": 0.435416,
+   "dur": 0.291666
+  },
+  {
+   "word": "Little",
+   "start": 0.95625,
+   "dur": 0.291666
+  },
+  {
+   "word": "Duck",
+   "start": 1.258333,
+   "dur": 0.291666
+  },
+  {
+   "word": "splash",
+   "start": 1.779166,
+   "dur": 0.510416
+  },
+  {
+   "word": "splash",
+   "start": 2.51875,
+   "dur": 0.510416
+  },
+  {
+   "word": "splash",
+   "start": 3.247916,
+   "dur": 0.583333
+  }
+ ]
+}

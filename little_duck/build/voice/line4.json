@@ -1,0 +1,33 @@
+{
+ "text": "Rain goes plop, plop, plop,",
+ "voice": "en-US-AnaNeural",
+ "rate": "+20%",
+ "pitch": "+10Hz",
+ "words": [
+  {
+   "word": "Rain",
+   "start": 0.091666,
+   "dur": 0.322916
+  },
+  {
+   "word": "goes",
+   "start": 0.425,
+   "dur": 0.270833
+  },
+  {
+   "word": "plop",
+   "start": 0.70625,
+   "dur": 0.395833
+  },
+  {
+   "word": "plop",
+   "start": 1.352083,
+   "dur": 0.385416
+  },
+  {
+   "word": "plop",
+   "start": 1.9875,
+   "dur": 0.395833
+  }
+ ]
+}

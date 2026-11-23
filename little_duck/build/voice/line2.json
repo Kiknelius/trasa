@@ -1,0 +1,43 @@
+{
+ "text": "Little Duck, Little Duck, quack, quack, quack!",
+ "voice": "en-US-AnaNeural",
+ "rate": "+20%",
+ "pitch": "+10Hz",
+ "words": [
+  {
+   "word": "Little",
+   "start": 0.091666,
+   "dur": 0.333333
+  },
+  {
+   "word": "Duck",
+   "start": 0.435416,
+   "dur": 0.291666
+  },
+  {
+   "word": "Little",
+   "start": 0.945833,
+   "dur": 0.291666
+  },
+  {
+   "word": "Duck",
+   "start": 1.247916,
+   "dur": 0.3125
+  },
+  {
+   "word": "quack",
+   "start": 1.758333,
+   "dur": 0.395833
+  },
+  {
+   "word": "quack",
+   "start": 2.3625,
+   "dur": 0.385416
+  },
+  {
+   "word": "quack",
+   "start": 2.945833,
+   "dur": 0.427083
+  }
+ ]
+}

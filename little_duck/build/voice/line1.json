@@ -1,0 +1,43 @@
+{
+ "text": "Jumping in puddles, make a big dash!",
+ "voice": "en-US-AnaNeural",
+ "rate": "+20%",
+ "pitch": "+10Hz",
+ "words": [
+  {
+   "word": "Jumping",
+   "start": 0.091666,
+   "dur": 0.416666
+  },
+  {
+   "word": "in",
+   "start": 0.51875,
+   "dur": 0.125
+  },
+  {
+   "word": "puddles",
+   "start": 0.654166,
+   "dur": 0.5
+  },
+  {
+   "word": "make",
+   "start": 1.404166,
+   "dur": 0.208333
+  },
+  {
+   "word": "a",
+   "start": 1.622916,
+   "dur": 0.072916
+  },
+  {
+   "word": "big",
+   "start": 1.70625,
+   "dur": 0.260416
+  },
+  {
+   "word": "dash",
+   "start": 1.977083,
+   "dur": 0.427083
+  }
+ ]
+}
