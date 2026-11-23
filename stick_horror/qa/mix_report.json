@@ -1,0 +1,128 @@
+{
+ "final_peak_dbfs": -1.4939142693324765,
+ "len_s": 47.68,
+ "clipped": 0,
+ "loudnorm_in": "-23.37",
+ "lines": [
+  {
+   "t0": 0.25,
+   "text": "My grandma had one rule.",
+   "voice_over_bg_db": 13.1
+  },
+  {
+   "t0": 2.129,
+   "text": "Never count the people in the mirror.",
+   "voice_over_bg_db": 12.4
+  },
+  {
+   "t0": 4.9,
+   "text": "Last night, the power went out...",
+   "voice_over_bg_db": 12.0
+  },
+  {
+   "t0": 7.318,
+   "text": "and I broke it.",
+   "voice_over_bg_db": 12.5
+  },
+  {
+   "t0": 9.6,
+   "text": "One.",
+   "voice_over_bg_db": 10.4
+  },
+  {
+   "t0": 10.5,
+   "text": "Just me.",
+   "voice_over_bg_db": 14.6
+  },
+  {
+   "t0": 11.9,
+   "text": "The candle flickered.",
+   "voice_over_bg_db": 11.9
+  },
+  {
+   "t0": 14.0,
+   "text": "Two.",
+   "voice_over_bg_db": 1.9
+  },
+  {
+   "t0": 15.4,
+   "text": "I turned around.",
+   "voice_over_bg_db": 10.2
+  },
+  {
+   "t0": 17.6,
+   "text": "Nobody there.",
+   "voice_over_bg_db": 10.8
+  },
+  {
+   "t0": 19.3,
+   "text": "I looked back.",
+   "voice_over_bg_db": 5.6
+  },
+  {
+   "t0": 21.0,
+   "text": "Three.",
+   "voice_over_bg_db": 0.6
+  },
+  {
+   "t0": 22.3,
+   "text": "They were closer now.",
+   "voice_over_bg_db": 4.9
+  },
+  {
+   "t0": 24.6,
+   "text": "I raised my hand.",
+   "voice_over_bg_db": 4.9
+  },
+  {
+   "t0": 26.196,
+   "text": "My reflection didn't.",
+   "voice_over_bg_db": 2.9
+  },
+  {
+   "t0": 27.9,
+   "text": "It just...",
+   "voice_over_bg_db": 2.3
+  },
+  {
+   "t0": 29.4,
+   "text": "smiled.",
+   "voice_over_bg_db": -1.3
+  },
+  {
+   "t0": 31.0,
+   "text": "Then the candle went out.",
+   "voice_over_bg_db": 4.7
+  },
+  {
+   "t0": 34.6,
+   "text": "When the light came back,",
+   "voice_over_bg_db": 0.5
+  },
+  {
+   "t0": 36.3,
+   "text": "I was on the wrong side of the glass.",
+   "voice_over_bg_db": 4.9
+  },
+  {
+   "t0": 39.3,
+   "text": "And the thing wearing my face",
+   "voice_over_bg_db": 5.6
+  },
+  {
+   "t0": 41.434,
+   "text": "picked up the candle...",
+   "voice_over_bg_db": 3.8
+  },
+  {
+   "t0": 43.2,
+   "text": "and started counting.",
+   "voice_over_bg_db": 3.9
+  },
+  {
+   "t0": 45.6,
+   "text": "One.",
+   "voice_over_bg_db": 14.7
+  }
+ ]
+}

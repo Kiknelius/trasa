@@ -1,0 +1,28 @@
+{
+ "text": "They were closer now.",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-12%",
+ "pitch": "-8Hz",
+ "words": [
+  {
+   "word": "They",
+   "start": 0.106833,
+   "dur": 0.198875
+  },
+  {
+   "word": "were",
+   "start": 0.319875,
+   "dur": 0.15625
+  },
+  {
+   "word": "closer",
+   "start": 0.490333,
+   "dur": 0.497166
+  },
+  {
+   "word": "now",
+   "start": 1.001708,
+   "dur": 0.411916
+  }
+ ]
+}

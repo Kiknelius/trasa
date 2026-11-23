@@ -1,0 +1,38 @@
+{
+ "text": "Last night, the power went out...",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-8%",
+ "pitch": "-6Hz",
+ "words": [
+  {
+   "word": "Last",
+   "start": 0.104333,
+   "dur": 0.380416
+  },
+  {
+   "word": "night",
+   "start": 0.498375,
+   "dur": 0.326083
+  },
+  {
+   "word": "the",
+   "start": 1.055416,
+   "dur": 0.122291
+  },
+  {
+   "word": "power",
+   "start": 1.191291,
+   "dur": 0.448375
+  },
+  {
+   "word": "went",
+   "start": 1.65325,
+   "dur": 0.190208
+  },
+  {
+   "word": "out",
+   "start": 1.857083,
+   "dur": 0.421208
+  }
+ ]
+}

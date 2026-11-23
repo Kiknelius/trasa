@@ -1,0 +1,13 @@
+{
+ "text": "Three.",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-15%",
+ "pitch": "-10Hz",
+ "words": [
+  {
+   "word": "Three",
+   "start": 0.108833,
+   "dur": 0.66175
+  }
+ ]
+}

@@ -1,0 +1,33 @@
+{
+ "text": "When the light came back,",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-8%",
+ "pitch": "-6Hz",
+ "words": [
+  {
+   "word": "When",
+   "start": 0.104333,
+   "dur": 0.190208
+  },
+  {
+   "word": "the",
+   "start": 0.308166,
+   "dur": 0.095125
+  },
+  {
+   "word": "light",
+   "start": 0.416833,
+   "dur": 0.326083
+  },
+  {
+   "word": "came",
+   "start": 0.756541,
+   "dur": 0.27175
+  },
+  {
+   "word": "back",
+   "start": 1.041833,
+   "dur": 0.516291
+  }
+ ]
+}

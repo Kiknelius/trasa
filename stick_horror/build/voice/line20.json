@@ -1,0 +1,38 @@
+{
+ "text": "And the thing wearing my face",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-12%",
+ "pitch": "-10Hz",
+ "words": [
+  {
+   "word": "And",
+   "start": 0.106833,
+   "dur": 0.15625
+  },
+  {
+   "word": "the",
+   "start": 0.277291,
+   "dur": 0.113625
+  },
+  {
+   "word": "thing",
+   "start": 0.405125,
+   "dur": 0.355125
+  },
+  {
+   "word": "wearing",
+   "start": 0.774416,
+   "dur": 0.326708
+  },
+  {
+   "word": "my",
+   "start": 1.115333,
+   "dur": 0.15625
+  },
+  {
+   "word": "face",
+   "start": 1.285791,
+   "dur": 0.696041
+  }
+ ]
+}

@@ -1,0 +1,5 @@
+build/frames/
+build/stems/
+build/*.wav
+build/render.log
+.parallax/

@@ -1,0 +1,13 @@
+{
+ "text": "Two.",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-15%",
+ "pitch": "-8Hz",
+ "words": [
+  {
+   "word": "Two",
+   "start": 0.108833,
+   "dur": 0.529416
+  }
+ ]
+}

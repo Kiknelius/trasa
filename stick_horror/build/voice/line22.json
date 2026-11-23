@@ -1,0 +1,23 @@
+{
+ "text": "and started counting.",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-15%",
+ "pitch": "-12Hz",
+ "words": [
+  {
+   "word": "and",
+   "start": 0.108833,
+   "dur": 0.220583
+  },
+  {
+   "word": "started",
+   "start": 0.344125,
+   "dur": 0.5
+  },
+  {
+   "word": "counting",
+   "start": 0.858833,
+   "dur": 0.647041
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+{
+ "text": "My reflection didn't.",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-12%",
+ "pitch": "-8Hz",
+ "words": [
+  {
+   "word": "My",
+   "start": 0.106833,
+   "dur": 0.241458
+  },
+  {
+   "word": "reflection",
+   "start": 0.3625,
+   "dur": 0.681833
+  },
+  {
+   "word": "didn't",
+   "start": 1.058541,
+   "dur": 0.482958
+  }
+ ]
+}

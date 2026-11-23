@@ -1,0 +1,18 @@
+{
+ "text": "Just me.",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-10%",
+ "pitch": "-6Hz",
+ "words": [
+  {
+   "word": "Just",
+   "start": 0.105541,
+   "dur": 0.361125
+  },
+  {
+   "word": "me",
+   "start": 0.480541,
+   "dur": 0.319458
+  }
+ ]
+}

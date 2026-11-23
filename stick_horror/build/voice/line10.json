@@ -1,0 +1,23 @@
+{
+ "text": "I looked back.",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-8%",
+ "pitch": "-6Hz",
+ "words": [
+  {
+   "word": "I",
+   "start": 0.104333,
+   "dur": 0.163041
+  },
+  {
+   "word": "looked",
+   "start": 0.280958,
+   "dur": 0.326083
+  },
+  {
+   "word": "back",
+   "start": 0.620666,
+   "dur": 0.502708
+  }
+ ]
+}

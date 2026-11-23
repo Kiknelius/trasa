@@ -1,0 +1,21 @@
+NEVER COUNT THE PEOPLE IN THE MIRROR - credits & licenses
+==========================================================
+Story, animation and sound design: original, made entirely by code (scene/main.js, mix_audio.py).
+
+VOICE
+  Free Microsoft Edge "Read Aloud" neural voice en-US-ChristopherNeural via the open-source
+  edge-tts tool (https://github.com/rany2/edge-tts); pitched down / reverb added in code.
+  Note: Microsoft does not publish an explicit commercial licence for this free service.
+
+SOUND EFFECTS (all CC0 / public domain - no attribution required)
+  "Ambient horror" by techiew           https://opengameart.org/content/ambient-horror
+  "Heartbeat sounds" by bart            https://opengameart.org/content/heartbeat-sounds
+  "Light Switch Turn On And Off SFX" by funnydude  https://opengameart.org/content/light-switch-turn-on-and-off-sfx-0
+  "100 CC0 SFX" by rubberduck (glass, wood knocks, door creak, weird, noise)
+                                        https://opengameart.org/content/100-cc0-sfx
+  Synthesized in code: drone, stings, risers, whooshes, match strike, candle crackle & puff, bulb hum.
+
+FONTS (SIL Open Font License 1.1)
+  Creepster - Sideshow (Google Fonts);  Poppins - Indian Type Foundry (Google Fonts)
+
+SOFTWARE: Playwright + Chromium, ffmpeg, numpy, scipy.

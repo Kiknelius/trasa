@@ -1,0 +1,18 @@
+{
+ "text": "Nobody there.",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-10%",
+ "pitch": "-6Hz",
+ "words": [
+  {
+   "word": "Nobody",
+   "start": 0.105541,
+   "dur": 0.541666
+  },
+  {
+   "word": "there",
+   "start": 0.661125,
+   "dur": 0.430541
+  }
+ ]
+}

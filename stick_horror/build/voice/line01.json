@@ -1,0 +1,43 @@
+{
+ "text": "Never count the people in the mirror.",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-10%",
+ "pitch": "-6Hz",
+ "words": [
+  {
+   "word": "Never",
+   "start": 0.105541,
+   "dur": 0.402791
+  },
+  {
+   "word": "count",
+   "start": 0.522208,
+   "dur": 0.305541
+  },
+  {
+   "word": "the",
+   "start": 0.841666,
+   "dur": 0.097208
+  },
+  {
+   "word": "people",
+   "start": 0.952791,
+   "dur": 0.388875
+  },
+  {
+   "word": "in",
+   "start": 1.355541,
+   "dur": 0.097208
+  },
+  {
+   "word": "the",
+   "start": 1.466666,
+   "dur": 0.069458
+  },
+  {
+   "word": "mirror",
+   "start": 1.55,
+   "dur": 0.513875
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "text": "It just...",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-15%",
+ "pitch": "-8Hz",
+ "words": [
+  {
+   "word": "It",
+   "start": 0.108833,
+   "dur": 0.191166
+  },
+  {
+   "word": "just",
+   "start": 0.314708,
+   "dur": 0.632333
+  }
+ ]
+}

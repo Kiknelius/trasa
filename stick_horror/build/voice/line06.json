@@ -1,0 +1,23 @@
+{
+ "text": "The candle flickered.",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-10%",
+ "pitch": "-6Hz",
+ "words": [
+  {
+   "word": "The",
+   "start": 0.105541,
+   "dur": 0.152791
+  },
+  {
+   "word": "candle",
+   "start": 0.272208,
+   "dur": 0.472208
+  },
+  {
+   "word": "flickered",
+   "start": 0.758333,
+   "dur": 0.611125
+  }
+ ]
+}

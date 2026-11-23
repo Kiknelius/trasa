@@ -1,0 +1,23 @@
+{
+ "text": "I turned around.",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-5%",
+ "pitch": "-6Hz",
+ "words": [
+  {
+   "word": "I",
+   "start": 0.102625,
+   "dur": 0.157875
+  },
+  {
+   "word": "turned",
+   "start": 0.273666,
+   "dur": 0.302625
+  },
+  {
+   "word": "around",
+   "start": 0.589458,
+   "dur": 0.578958
+  }
+ ]
+}

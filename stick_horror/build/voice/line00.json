@@ -1,0 +1,33 @@
+{
+ "text": "My grandma had one rule.",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-8%",
+ "pitch": "-6Hz",
+ "words": [
+  {
+   "word": "My",
+   "start": 0.104333,
+   "dur": 0.217375
+  },
+  {
+   "word": "grandma",
+   "start": 0.335333,
+   "dur": 0.421208
+  },
+  {
+   "word": "had",
+   "start": 0.770125,
+   "dur": 0.258166
+  },
+  {
+   "word": "one",
+   "start": 1.041833,
+   "dur": 0.285333
+  },
+  {
+   "word": "rule",
+   "start": 1.34075,
+   "dur": 0.421208
+  }
+ ]
+}

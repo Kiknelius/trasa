@@ -1,0 +1,28 @@
+{
+ "text": "picked up the candle...",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-12%",
+ "pitch": "-10Hz",
+ "words": [
+  {
+   "word": "picked",
+   "start": 0.106833,
+   "dur": 0.340916
+  },
+  {
+   "word": "up",
+   "start": 0.461916,
+   "dur": 0.170458
+  },
+  {
+   "word": "the",
+   "start": 0.646583,
+   "dur": 0.099416
+  },
+  {
+   "word": "candle",
+   "start": 0.760208,
+   "dur": 0.625
+  }
+ ]
+}

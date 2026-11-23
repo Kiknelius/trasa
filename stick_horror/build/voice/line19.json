@@ -1,0 +1,53 @@
+{
+ "text": "I was on the wrong side of the glass.",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-10%",
+ "pitch": "-8Hz",
+ "words": [
+  {
+   "word": "I",
+   "start": 0.105541,
+   "dur": 0.166666
+  },
+  {
+   "word": "was",
+   "start": 0.286125,
+   "dur": 0.194458
+  },
+  {
+   "word": "on",
+   "start": 0.494458,
+   "dur": 0.125
+  },
+  {
+   "word": "the",
+   "start": 0.633333,
+   "dur": 0.097208
+  },
+  {
+   "word": "wrong",
+   "start": 0.744458,
+   "dur": 0.388875
+  },
+  {
+   "word": "side",
+   "start": 1.147208,
+   "dur": 0.333333
+  },
+  {
+   "word": "of",
+   "start": 1.494458,
+   "dur": 0.069458
+  },
+  {
+   "word": "the",
+   "start": 1.577791,
+   "dur": 0.083333
+  },
+  {
+   "word": "glass",
+   "start": 1.675,
+   "dur": 0.680541
+  }
+ ]
+}

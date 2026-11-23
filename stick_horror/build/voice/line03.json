@@ -1,0 +1,28 @@
+{
+ "text": "and I broke it.",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-10%",
+ "pitch": "-8Hz",
+ "words": [
+  {
+   "word": "and",
+   "start": 0.105541,
+   "dur": 0.194458
+  },
+  {
+   "word": "I",
+   "start": 0.313875,
+   "dur": 0.083333
+  },
+  {
+   "word": "broke",
+   "start": 0.411125,
+   "dur": 0.375
+  },
+  {
+   "word": "it",
+   "start": 0.8,
+   "dur": 0.263875
+  }
+ ]
+}

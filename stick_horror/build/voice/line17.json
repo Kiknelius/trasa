@@ -1,0 +1,33 @@
+{
+ "text": "Then the candle went out.",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-10%",
+ "pitch": "-8Hz",
+ "words": [
+  {
+   "word": "Then",
+   "start": 0.105541,
+   "dur": 0.305541
+  },
+  {
+   "word": "the",
+   "start": 0.425,
+   "dur": 0.111125
+  },
+  {
+   "word": "candle",
+   "start": 0.55,
+   "dur": 0.458333
+  },
+  {
+   "word": "went",
+   "start": 1.022208,
+   "dur": 0.208333
+  },
+  {
+   "word": "out",
+   "start": 1.244458,
+   "dur": 0.416666
+  }
+ ]
+}

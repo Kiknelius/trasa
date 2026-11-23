@@ -1,0 +1,28 @@
+{
+ "text": "I raised my hand.",
+ "voice": "en-US-ChristopherNeural",
+ "rate": "-8%",
+ "pitch": "-6Hz",
+ "words": [
+  {
+   "word": "I",
+   "start": 0.104333,
+   "dur": 0.190208
+  },
+  {
+   "word": "raised",
+   "start": 0.308166,
+   "dur": 0.421208
+  },
+  {
+   "word": "my",
+   "start": 0.742916,
+   "dur": 0.163041
+  },
+  {
+   "word": "hand",
+   "start": 0.919583,
+   "dur": 0.58425
+  }
+ ]
+}
